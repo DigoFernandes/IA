@@ -7,17 +7,20 @@ import pyttsx3
 import webbrowser
 import wikipedia
 import wolframalpha
+from gtts import gTTS
 
 # inicializando a engine de reconhecimento de audio
 engine = pyttsx3.init()
 # inciiando o reconhecimento de voz
-voices = engine.getProperty("voices")
+voz = engine.getProperty("voices")
 
-engine.setProperty("voice", voices[1].id)  # 0= homem, 1=mulher
-activationWord = "computer"  # para ativar deve uma palavra simples
+engine.setProperty("voice", voz)
+engine.setProperty("language", "pt-br")
+    
+ativadorVoz = "lisa"  # para ativar deve uma palavra simples
 
 
-def speak(text, rate=120):
+def speak(text, rate=160):
     """Função que transforma texto em voz
     Args:
         text (string): Texto que foi dito durante o parseCommand
@@ -28,47 +31,50 @@ def speak(text, rate=120):
     engine.runAndWait()
 
 
-def parseCommand():
+def paraTexto():
+    
     """Comando que transforma voz em texto
 
     Returns:
         string: Texto que foi dito durante a verificação
     """
     listener = sr.Recognizer()
-    print("Ouvindo seu pedido")
-
+    print('Ouvindo seu pedido')
+ 
     with sr.Microphone() as source:
-        listener.pause_threshold = 1
+        listener.pause_threshold = 2
         input_speech = listener.listen(source)
-
-    try:
-        print("Reconhecendo sua voz..........")
-        query = listener.recognize_google(input_speech, language="pt_br")
-        print(f"O texto falado foi: {query}")
+ 
+    try: 
+        print('Identificando seu pedido')
+        vozParaTexto = listener.recognize_google(input_speech, language='pt_br')
+        print(f'O seu pedido é: {vozParaTexto}')
     except Exception as exception:
-        print("Não entendi sua burrice, fale de novo")
+        print('Não entendi oque você falou, poderia repetir?')
+        speak('Não entendi oque você falou, poderia repetir?')
         print(exception)
-        return "None"
-    return query
+        return 'None'
+ 
+    return vozParaTexto
 
 
 # main
 
-if __name__ == "__main__":
-    speak("On", 120)
+if __name__ == '__main__':
+    speak('Ligada.')
 
     while True:
-        # transformar em lista
-        query = parseCommand().split()
+        # Parse as a list
+        vozParaTexto = paraTexto().lower().split()
+        print(vozParaTexto)
+        if vozParaTexto[0] == ativadorVoz:
+            vozParaTexto.pop(0)
 
-        if query[0] == activationWord:
-            query.pop(0)
-
-            # comando da lista
-            if query[0] == "say":
-                if "Hello" in query:
-                    speak("Hi!")
-                else:
-                    query.pop(0)  # tira diz
-                    speech = "  ".join(query)
+            # List commands
+            if vozParaTexto[0] == 'diga':
+                if 'oi' in vozParaTexto:
+                    speak('Olá, tudo bem? Sou a inteligencia artificial feita pela NEON')
+                else: 
+                    vozParaTexto.pop(0) # Remove say
+                    speech = ' '.join(vozParaTexto)
                     speak(speech)
