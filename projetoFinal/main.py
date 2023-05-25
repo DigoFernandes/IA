@@ -29,7 +29,7 @@ def speak(text, rate=120):
 
 
 def parseCommand():
-    """Comando que transforma voz em textoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    """Comando que transforma voz em texto
 
     Returns:
         string: Texto que foi dito durante a verificaçao documentação
