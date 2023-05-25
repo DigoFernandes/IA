@@ -29,10 +29,10 @@ def speak(text, rate=120):
 
 
 def parseCommand():
-    """Comando que transforma voz em texto
+    """Comando que transforma voz em textoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
     Returns:
-        string: Texto que foi dito durante a verificação
+        string: Texto que foi dito durante a verificaçao documentação
     """
     listener = sr.Recognizer()
     print("Ouvindo seu pedido")
