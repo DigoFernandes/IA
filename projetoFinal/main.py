@@ -7,7 +7,7 @@ import pyttsx3
 import webbrowser
 import wikipedia
 import wolframalpha
-from gtts import gTTS
+
 
 # inicializando a engine de reconhecimento de audio
 engine = pyttsx3.init()
@@ -20,10 +20,10 @@ engine.setProperty("language", "pt-br")
 ativadorVoz = "lisa"  # para ativar deve uma palavra simples
 
 
-def speak(text, rate=160):
+def falar(text, rate=200):
     """Função que transforma texto em voz
     Args:
-        text (string): Texto que foi dito durante o parseCommand
+        text (string): Texto que foi dito durante o transformarComando
         rate (int, optional): Velocidade da fala. Defaults to 120.
     """
     engine.setProperty("rate", rate)
@@ -31,8 +31,8 @@ def speak(text, rate=160):
     engine.runAndWait()
 
 
-def parseCommand():
-    """Comando que transforma voz em textoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+def transformarComando():
+    """Comando que transforma voz em texto
 
     Returns:
         string: Texto que foi dito durante a verificaçao documentação
@@ -50,7 +50,7 @@ def parseCommand():
         print(f'O seu pedido é: {vozParaTexto}')
     except Exception as exception:
         print('Não entendi oque você falou, poderia repetir?')
-        speak('Não entendi oque você falou, poderia repetir?')
+        falar('Não entendi oque você falou, poderia repetir?')
         print(exception)
         return 'None'
  
@@ -60,20 +60,20 @@ def parseCommand():
 # main
 
 if __name__ == '__main__':
-    speak('Ligada.')
+    falar('Ligada.')
 
     while True:
         # Parse as a list
-        vozParaTexto = parseCommand().lower().split()
-        print(vozParaTexto)
+        vozParaTexto = transformarComando().lower().split()
+        
         if vozParaTexto[0] == ativadorVoz:
             vozParaTexto.pop(0)
 
             # List commands
             if vozParaTexto[0] == 'diga':
                 if 'oi' in vozParaTexto:
-                    speak('Olá, tudo bem? Sou a inteligencia artificial feita pela NEON')
+                    falar('Olá, tudo bem? Sou a inteligencia artificial feita pela NEON')
                 else: 
                     vozParaTexto.pop(0) # Remove say
-                    speech = ' '.join(vozParaTexto)
-                    speak(speech)
+                    falando = ' '.join(vozParaTexto)
+                    falar(falando)
