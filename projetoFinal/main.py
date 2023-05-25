@@ -31,12 +31,11 @@ def speak(text, rate=160):
     engine.runAndWait()
 
 
-def paraTexto():
-    
-    """Comando que transforma voz em texto
+def parseCommand():
+    """Comando que transforma voz em textoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
     Returns:
-        string: Texto que foi dito durante a verificação
+        string: Texto que foi dito durante a verificaçao documentação
     """
     listener = sr.Recognizer()
     print('Ouvindo seu pedido')
@@ -65,7 +64,7 @@ if __name__ == '__main__':
 
     while True:
         # Parse as a list
-        vozParaTexto = paraTexto().lower().split()
+        vozParaTexto = parseCommand().lower().split()
         print(vozParaTexto)
         if vozParaTexto[0] == ativadorVoz:
             vozParaTexto.pop(0)
