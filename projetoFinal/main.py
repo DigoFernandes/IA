@@ -20,14 +20,14 @@ engine.setProperty("language", "pt-br")
 ativadorVoz = "lisa"  # para ativar deve uma palavra simples
 
 
-def falar(text, rate=200):
+def falar(texto, rate=200):
     """Função que transforma texto em voz
     Args:
         text (string): Texto que foi dito durante o transformarComando
         rate (int, optional): Velocidade da fala. Defaults to 120.
     """
     engine.setProperty("rate", rate)
-    engine.say(text)
+    engine.say(texto)
     engine.runAndWait()
 
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     falar('Ligada.')
 
     while True:
-        # Parse as a list
+        # Transformar em split
         vozParaTexto = transformarComando().lower().split()
         
         if vozParaTexto[0] == ativadorVoz:
