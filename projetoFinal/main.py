@@ -6,15 +6,9 @@ import speech_recognition as sr
 import pyttsx3
 import webbrowser
 import wikipedia
-import wolframalpha
-<<<<<<< HEAD
 
-
-=======
-from gtts import gTTS
 # inicializando o wikipedia em portugues
 wikipedia.set_lang("pt")
->>>>>>> prototypeDigo
 # inicializando a engine de reconhecimento de audio
 engine = pyttsx3.init()
 # inciiando o reconhecimento de voz
@@ -29,28 +23,25 @@ ativadorVoz = "lisa"  # para ativar deve uma palavra simples
 edgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 webbrowser.register("edge", None, webbrowser.BackgroundBrowser(edgePath))
 
-<<<<<<< HEAD
-def falar(texto, rate=200):
-=======
 
 def fale(text, rate=160):
     
->>>>>>> prototypeDigo
     """Função que transforma texto em voz
     Args:
-        text (string): Texto que foi dito durante o transformarComando
+        text (string): Texto que foi dito durante o parseCommand
         rate (int, optional): Velocidade da fala. Defaults to 120.
     """
     engine.setProperty("rate", rate)
-    engine.say(texto)
+    engine.say(text)
     engine.runAndWait()
 
 
-def transformarComando():
+def paraTexto():
+    
     """Comando que transforma voz em texto
 
     Returns:
-        string: Texto que foi dito durante a verificaçao documentação
+        string: Texto que foi dito durante a verificação
     """
     
     listener = sr.Recognizer()
@@ -65,13 +56,8 @@ def transformarComando():
         vozParaTexto = listener.recognize_google(input_speech, language="pt_br")
         print(f"O seu pedido é: {vozParaTexto}")
     except Exception as exception:
-<<<<<<< HEAD
-        print('Não entendi oque você falou, poderia repetir?')
-        falar('Não entendi oque você falou, poderia repetir?')
-=======
         print("Não entendi oque você falou, poderia repetir?")
         fale("Não entendi oque você falou, poderia repetir?")
->>>>>>> prototypeDigo
         print(exception)
         return "None"
 
@@ -92,12 +78,6 @@ def pesquisarWikipedia(vozParaTexto):
 
 # Loop Main
 
-if __name__ == '__main__':
-    falar('Ligada.')
-
-    while True:
-        # Transformar em split
-        vozParaTexto = transformarComando().lower().split()
 if __name__ == "__main__":
     fale("Ligada.")
 
@@ -108,14 +88,6 @@ if __name__ == "__main__":
         if vozParaTexto[0] == ativadorVoz:
             vozParaTexto.pop(0)
 
-            # List commands
-            if vozParaTexto[0] == 'diga':
-                if 'oi' in vozParaTexto:
-                    falar('Olá, tudo bem? Sou a inteligencia artificial feita pela NEON')
-                else: 
-                    vozParaTexto.pop(0) # Remove say
-                    falando = ' '.join(vozParaTexto)
-                    falar(falando)
             # Comandos
             if vozParaTexto[0] == "diga":
                 if "oi" in vozParaTexto:
